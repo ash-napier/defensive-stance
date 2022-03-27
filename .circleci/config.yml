@@ -1,17 +1,17 @@
 defaults: &defaults
   docker:
-    - image: circleci/node:8
+    - image: circleci/node:14
 
 version: 2
 jobs:
   pre-build:
-    working_directory: ~/gatsbyBlog
+    working_directory: ~/defensive-stance
     <<: *defaults
     steps:
       - checkout:
-          path: ~/gatsbyBlog/
+          path: ~/defensive-stance/
       - attach_workspace:
-          at: ~/gatsbyBlog/
+          at: ~/defensive-stance/
 
       - restore_cache:
           key: node-v2-{{ checksum "package.json" }}-{{ arch }}
@@ -24,31 +24,31 @@ jobs:
             - node_modules
 
       - persist_to_workspace:
-          root: ~/gatsbyBlog
+          root: ~/defensive-stance
           paths:
             - node_modules
   lint:
-    working_directory: ~/gatsbyBlog
+    working_directory: ~/defensive-stance
     <<: *defaults
     steps:
       - checkout
       - attach_workspace:
-          at: ~/gatsbyBlog
+          at: ~/defensive-stance
       - run: npm run lint
 
   gatsby-deploy:
-    working_directory: ~/gatsbyBlog
+    working_directory: ~/defensive-stance
     <<: *defaults
     steps:
       - checkout:
-          path: ~/gatsbyBlog/
+          path: ~/defensive-stance/
       - attach_workspace:
-          at: ~/gatsbyBlog
+          at: ~/defensive-stance
       - run:
           command: |
             sudo apt-get -y -qq install awscli
             CI=false npm run build:ci
-            aws s3 sync public/ s3://gatsby-ci-demo  --region ap-southeast-2 --delete
+            aws s3 sync public/ s3://defensive-stance-prod  --region us-east-1 --delete
 workflows:
   version: 2
   front-backend:
@@ -57,7 +57,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
       - lint:
           requires:
             - pre-build
@@ -67,4 +67,4 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
