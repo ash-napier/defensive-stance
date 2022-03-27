@@ -36,8 +36,8 @@ if (!spaceId || !accessToken) {
 
 module.exports = {
   siteMetadata: {
-    title: "Gatsby Contentful Starter",
-    description: "Official Contentful Gatsby Starter",
+    title: "Defensive Stance",
+    description: "Personal blog for Ash Napier",
   },
   pathPrefix: "/gatsby-contentful-starter",
   plugins: [
@@ -50,5 +50,26 @@ module.exports = {
       resolve: "gatsby-source-contentful",
       options: contentfulConfig,
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GOOGLE_ANALYTICS_ID,
+        // Where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        exclude: ["/preview/**", "/do-not-track/me/too/"]
+      },
+    },
+    {
+      resolve: `gatsby-plugin-s3`,
+      options: {
+        bucketName: process.env.BUCKET_NAME,
+        protocol: "https",
+        hostname: "www.defensive-stance.com",
+      },
+    }
   ],
 };
