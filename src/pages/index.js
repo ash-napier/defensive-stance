@@ -1,9 +1,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-
+import Container from '../components/container'
 import Layout from '../components/layout'
-import Hero from '../components/hero'
+import Bio from '../components/bio'
 import ArticlePreview from '../components/article-preview'
 
 class RootIndex extends React.Component {
@@ -13,11 +13,21 @@ class RootIndex extends React.Component {
 
     return (
       <Layout location={this.props.location}>
-        <Hero
+        <Bio
           image={author.heroImage.gatsbyImageData}
-          title={author.name}
-          content={author.shortBio.shortBio}
+          title="Defensive Stance"
+          author={author.name}
+          twitter={author.twitter}
+          linkedIn={author.linkedIn}
+          github={author.github}
         />
+        <Container>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: author.bio?.childMarkdownRemark?.html,
+            }}
+          />
+        </Container>
         <ArticlePreview posts={posts} />
       </Layout>
     )
@@ -50,20 +60,24 @@ export const pageQuery = graphql`
       }
     }
     allContentfulPerson(
-      filter: { contentful_id: { eq: "15jwOBqpxqSAOy2eOO4S0m" } }
+      filter: { contentful_id: { eq: "2aa7dWXuT1KgjD8KRaeNNg" } }
     ) {
       nodes {
         name
-        shortBio {
-          shortBio
-        }
-        title
+        pronouns
+        twitter
+        github
+        linkedIn
         heroImage: image {
-          gatsbyImageData(
-            layout: CONSTRAINED
-            placeholder: BLURRED
-            width: 1180
-          )
+          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
+          resize(height: 630, width: 1200) {
+            src
+          }
+        }
+        bio {
+          childMarkdownRemark {
+            html
+          }
         }
       }
     }

@@ -13,8 +13,11 @@ class BlogIndex extends React.Component {
 
     return (
       <Layout location={this.props.location}>
-        <Seo title="Blog" />
-        <Hero title="Blog" />
+        <Seo title="Defensive Stance Blog" />
+        <Hero
+          title="Defensive Stance"
+          subtitle="Blog by Amy Napier"
+        />
         <ArticlePreview posts={posts} />
       </Layout>
     )
@@ -34,9 +37,11 @@ export const pageQuery = graphql`
         heroImage {
           gatsbyImageData(
             layout: FULL_WIDTH
-            placeholder: BLURRED
+            placeholder: TRACED_SVG
+            formats: [AUTO, WEBP]
             width: 424
             height: 212
+            quality: 100
           )
         }
         description {

@@ -27,12 +27,17 @@ class BlogPostTemplate extends React.Component {
           content={post.description?.childMarkdownRemark?.excerpt}
         />
         <div className={styles.container}>
-          <span className={styles.meta}>
-            {post.author?.name} &middot;{' '}
-            <time dateTime={post.rawDate}>{post.publishDate}</time> –{' '}
-            {post.body?.childMarkdownRemark?.timeToRead} minute read
-          </span>
           <div className={styles.article}>
+            <span className={styles.meta}>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: post.heroImageCaption?.childMarkdownRemark?.html,
+                }}
+              />
+              Amy Napier &middot;{' '}
+              <time dateTime={post.rawDate}>{post.publishDate}</time> –{' '}
+              {post.body?.childMarkdownRemark?.timeToRead} minute read
+            </span>
             <div
               className={styles.body}
               dangerouslySetInnerHTML={{
@@ -78,15 +83,17 @@ export const pageQuery = graphql`
     contentfulBlogPost(slug: { eq: $slug }) {
       slug
       title
-      author {
-        name
-      }
       publishDate(formatString: "MMMM Do, YYYY")
       rawDate: publishDate
       heroImage {
         gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
         resize(height: 630, width: 1200) {
           src
+        }
+      }
+      heroImageCaption {
+        childMarkdownRemark {
+          html
         }
       }
       body {

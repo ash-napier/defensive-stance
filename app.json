@@ -1,13 +1,13 @@
 {
-  "name": "Contentful Gatsby Starter",
-  "description": "Gatsby starter for a Contentful project.",
+  "name": "Defensive Stance",
+  "description": "Personal Blog for Ash Napier",
   "keywords": [
     "contentful",
     "gatsby",
     "static",
-    "ssg"
+    "security"
   ],
-  "repository": "https://github.com/contentful-userland/gatsby-contentful-starter",
+  "repository": "https://github.com/ash-napier/defensive-stance",
   "success_url": "/",
   "buildpacks": [
     {
