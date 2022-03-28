@@ -1,6 +1,6 @@
 defaults: &defaults
   docker:
-    - image: circleci/node:14
+    - image: circleci/node:16
 
 version: 2
 jobs:
@@ -58,12 +58,12 @@ workflows:
             branches:
               only:
                 - main
-      - lint:
-          requires:
-            - pre-build
+      # - lint:
+      #    requires:
+      #      - pre-build
       - gatsby-deploy:
-          requires:
-            - lint
+          # requires:
+          #  - lint
           filters:
             branches:
               only:
