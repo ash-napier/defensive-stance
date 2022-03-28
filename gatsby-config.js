@@ -66,9 +66,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-s3`,
       options: {
-        bucketName: process.env.BUCKET_NAME,
-        protocol: "https",
-        hostname: "www.defensive-stance.com",
+        bucketName: process.env.S3_BUCKET_NAME
       },
     }
   ],
