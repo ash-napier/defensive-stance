@@ -68,8 +68,8 @@ export const pageQuery = graphql`
         twitter
         github
         linkedIn
-        heroImage: image {
-          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
+        heroImage : image {
+          gatsbyImageData(layout: FULL_WIDTH, quality: 100, placeholder: BLURRED, width: 1280)
           resize(height: 630, width: 1200) {
             src
           }
