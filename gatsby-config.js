@@ -39,7 +39,6 @@ module.exports = {
     title: "Defensive Stance",
     description: "Personal blog for Ash Napier",
   },
-  pathPrefix: "/gatsby-contentful-starter",
   plugins: [
     "gatsby-transformer-remark",
     "gatsby-transformer-sharp",
