@@ -10,7 +10,7 @@ class ErrorPage extends React.Component {
 
         return (
             <Layout location={this.props.location}>
-                <Seo title="Defensive Stance Error" />
+                <Seo title="Defensive Stance 404 Error" />
                     <Container>
                         <StaticImage
                             src="../../static/assets/nat1.png"
